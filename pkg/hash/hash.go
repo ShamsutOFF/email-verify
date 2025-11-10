@@ -6,10 +6,10 @@ import (
 )
 
 // Generate создаёт случайную 16-байтную строку в HEX-формате
-func Generate() string {
-	bytes := make([]byte, 16) // 128 бит
+func Generate() (string, error) {
+	bytes := make([]byte, 16)
 	if _, err := rand.Read(bytes); err != nil {
-		panic(err) // в реальном коде лучше вернуть ошибку
+		return "", err
 	}
-	return hex.EncodeToString(bytes)
+	return hex.EncodeToString(bytes), nil
 }
